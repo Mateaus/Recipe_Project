@@ -67,12 +67,14 @@ posts = [
 	}
 ]
 
+
 # This is our home function to handle home requests
 def home(request):
 	context = {
 		'posts': posts
 	}
 	return render(request, 'food_recipe/index.html', context)
+
 
 # This is an example function to handle /example requests
 def example(request):
