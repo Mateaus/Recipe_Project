@@ -1,36 +1,5 @@
-{% load static %}
-<!DOCTYPE html>
-<html>
-<head>
-	<title></title>
-	<link rel="stylesheet" type="text/css" href="{% static 'food_recipe/style.css' %}">
-</head>
-<body>
-	<header id="main-header">
-		<div class="container">
-			<h1>Food Recipes</h1>
-		</div>
-	</header>
-
-	<nav id="navbar">
-		<div class="container">
-			<div id="navbar-left">
-				<ul>
-					<li><a href="#">Home</a></li>
-					<li><a href="#">About</a></li>
-					<li><a href="#">Services</a></li>
-					<li><a href="#">Contact</a></li>
-				</ul>
-			</div>
-			<div id="navbar-right">
-				<ul>
-					<li><a href="#">Login</a></li>
-					<li><a href="#">Register</a></li>
-				</ul>
-			</div>
-		</div>
-	</nav>
-
+{% extends "food_recipe/base.html" %}	
+{% block content %}
 	<section id="showcase">
 		<div class="container">
 		</div>
@@ -51,9 +20,4 @@
 			{% endfor %}
 		</section>
 	</div>
-
-	<footer id="main-footer">
-		<p>Copyright &copy; 2017 Food Recipe</p>
-	</footer>
-</body>
-</html>
+{% endblock content %}

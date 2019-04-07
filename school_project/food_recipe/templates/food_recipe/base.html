@@ -1,0 +1,53 @@
+{% load static %}
+<!DOCTYPE html>
+<html>
+<head>
+	{% if title %}
+		<title>Recipe - {{ title }}</title>
+	{% else %}
+		<title>Recipe</title>
+	{% endif %}
+	<link rel="stylesheet" type="text/css" href="{% static 'food_recipe/style.css' %}">
+
+	<script>
+		var navbar = document.getElementsById("navbar");
+		var n = navbar.length;
+		function changeColor(color) {
+
+		}
+
+	</script>
+
+</head>
+<body>
+	<header id="main-header">
+		<div class="container">
+			<h1><a href="{% url 'food_recipe-home' %}">Food Recipes</a></h1>
+		</div>
+	</header>
+
+	<nav id="navbar">
+		<div class="container">
+			<div id="navbar-left">
+				<ul>
+					<li id="highlight"><a href="{% url 'food_recipe-home' %}">Home</a></li>
+					<li id="highlight"><a href="#">About</a></li>
+					<li id="highlight"><a href="#">Contact</a></li>
+				</ul>
+			</div>
+			<div id="navbar-right">
+				<ul>
+					<li id="highlight"><a href="#">Login</a></li>
+					<li id="highlight"><a href="#">Register</a></li>
+				</ul>
+			</div>
+		</div>
+	</nav>
+
+	{% block content %} {% endblock %}
+
+	<footer id="main-footer">
+		<p>Copyright &copy; 2017 Food Recipe</p>
+	</footer>
+</body>
+</html>
