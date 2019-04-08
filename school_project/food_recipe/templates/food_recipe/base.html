@@ -7,38 +7,45 @@
 	{% else %}
 		<title>Recipe</title>
 	{% endif %}
-	<link rel="stylesheet" type="text/css" href="{% static 'food_recipe/style.css' %}">
 
+	{% block css %} {% endblock css %}
 </head>
 <body>
 	<header id="main-header">
-		<div class="container">
+		<div class="mycontainer">
 			<h1><a href="{% url 'food_recipe-home' %}">Food Recipes</a></h1>
 		</div>
 	</header>
 
-	<nav id="navbar">
-		<div class="container">
-			<div id="navbar-left">
+	<nav id="mynavbar">
+		<div class="mycontainer">
+			<div id="mynavbar-left">
 				<ul>
 					<li id="highlight"><a href="{% url 'food_recipe-home' %}">Home</a></li>
 					<li id="highlight"><a href="#">About</a></li>
 					<li id="highlight"><a href="#">Contact</a></li>
 				</ul>
 			</div>
-			<div id="navbar-right">
+			<div id="mynavbar-right">
 				<ul>
-					<li id="highlight"><a href="#">Login</a></li>
-					<li id="highlight"><a href="{% url 'register' %}">Register</a></li>
+					{% if user.is_authenticated %}
+						<li id="highlight"><a href="{% url 'profile' %}">Profile</a></li>
+						<li id="highlight"><a href="{% url 'logout' %}">Logout</a></li>
+					{% else %}
+						<li id="highlight"><a href="{% url 'login' %}">Login</a></li>
+						<li id="highlight"><a href="{% url 'register' %}">Register</a></li>
+					{% endif %}
 				</ul>
 			</div>
 		</div>
 	</nav>
 
-	{% block content %} {% endblock %}
+	{% block content %} {% endblock content %}
 
 	<footer id="main-footer">
-		<p>Copyright &copy; 2017 Food Recipe</p>
+		<p>Copyright &copy; 2019 Food Recipe</p>
 	</footer>
+
+	{% block script %} {% endblock script %}
 </body>
 </html>
