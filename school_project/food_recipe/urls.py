@@ -7,5 +7,11 @@ urlpatterns = [
 	# views.(*) looks at views.py and extracts the specific func
     path('', views.home, name='food_recipe-home'),
     path('register/', user_views.register, name='register'),
-    path('example/', views.example, name='food_recipe-example'),
 ]
+
+from django.conf import settings
+from django.conf.urls.static import static
+
+if settings.DEBUG:
+	urlpatterns += static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)
+

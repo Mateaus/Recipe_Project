@@ -10,11 +10,11 @@
 			<h1>List of Recipes</h1>
 			{% for post in posts %}
 				<div id="card">
-					<img class="card-image" src="{{ post.image }}">
-					<h1>{{ post.title }}</h1>
+					<img class="card-image" src="{{ post.recipe_image.url }}">
+					<h1>{{ post.recipe_name }}</h1>
 					<div id="card-footer">
-						<p>By {{ post.author }}</p>
-						<p>On {{ post.date_posted }}</p>
+						<p>By {{ post.recipe_author }}</p>
+						<p>On {{ post.date_posted|date:"F d, Y" }}</p>
 					</div>
 				</div>
 			{% endfor %}
