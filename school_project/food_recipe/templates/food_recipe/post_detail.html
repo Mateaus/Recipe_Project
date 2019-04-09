@@ -1,8 +1,7 @@
-{% extends "food_recipe/base.html" %}
-{% load crispy_forms_tags %}
+{% extends "food_recipe/base.html" %}	
 {% load static %}
-{% block css %}
-     <!-- Required meta tags -->
+{% block css %} 
+	 <!-- Required meta tags -->
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
 
@@ -12,28 +11,22 @@
     <link rel="stylesheet" type="text/css" href="{% static 'food_recipe/style.css' %}">
 {% endblock css %}
 {% block content %}
-    <div class="container">
-        <div class="content-section">
-            <div class="media">
-                <img class="rounded-circle account-img" src="{{ user.profile.user_image.url }}">
-                <div class="media-body">
-                    <h2 class="account-heading">{{ user.username }}</h2>
-                    <p class="text-secondary">{{ user.email }}</p>
-                </div>
-            </div>
-            <form method="POST" enctype="multipart/form-data">
-                {% csrf_token %}
-                <fieldset class="form-group">
-                    <legend class="border-bottom mb-4">Profile Info</legend>
-                    {{ u_form|crispy }}
-                    {{ p_form|crispy }}
-                </fieldset>
-                <div class="form-group">
-                    <button class="btn btn-outline-info" type="submit">Update</button>
-                </div>
-            </form>
-        </div>
-    </div>
+
+	<div class="mycontainer">
+		<div class="content-section">
+			<h1>{{ object.recipe_name }}</h1>	
+			<p>By {{ object.recipe_author }}</p>		
+			<img class="card-image" src="{{ object.recipe_image.url }}">
+			<h2>Preparation: </h2>
+			<p>{{ object.recipe_content }}</p>
+			<p>On {{ object.date_posted|date:"F d, Y" }}</p>
+
+			{% if object.recipe_author == user %}
+				<a class="btn btn-secondary btn-sm mt-1 mb-1" href="{% url 'post-update' object.id %}">Update</a>
+				<a class="btn btn-danger btn-sm mt-1 mb-1" href="{% url 'post-delete' object.id %}">Delete</a>
+			{% endif %}
+		</div>
+	</div>
 {% endblock content %}
 {% block script %}
     <!-- Optional JavaScript -->

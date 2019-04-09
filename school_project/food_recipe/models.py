@@ -1,6 +1,8 @@
 from django.db import models
 from django.utils import timezone
 from django.contrib.auth.models import User
+from django.urls import reverse
+from PIL import Image
 
 # Our recipe database
 class Post(models.Model):
@@ -14,4 +16,16 @@ class Post(models.Model):
 	def __str__(self):
 		return self.recipe_name
 
-	
+	def save(self, **kwargs):
+		super().save()
+
+		img = Image.open(self.recipe_image.path)
+
+		if img.height > 200 or img.width > 200:
+			output_size = (200, 200)
+			img.thumbnail(output_size)
+			img.save(self.recipe_image.path)
+
+	# returns to the detail view of the recipe created
+	def get_absolute_url(self):
+		return reverse('post-detail', kwargs={'pk': self.pk})
