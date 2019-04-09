@@ -1,3 +1,8 @@
+html {
+	position: relative;
+    min-height: 100%;
+}
+
 body {
 	background-color: #f4f4f4;
 	color: #555;
@@ -6,6 +11,7 @@ body {
 	line-height: 1.6em;
 	margin: 0;
 	padding: 0px;
+	margin-bottom: 100px;
 }
 
 img {
@@ -163,6 +169,7 @@ p {
 }
 
 #card h1,p {
+	word-wrap:break-word;
 	padding-left: 10px;
 	padding-right: 10px;
 }
@@ -190,7 +197,9 @@ p {
 	padding-top: 20px;
 	padding-bottom: 20px;
 	margin-top: 40px;
-	position: relative;
+	position: absolute;
+	width: 100%;
+	bottom: 0px;
 }
 
 .content-section {
