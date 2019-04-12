@@ -28,8 +28,8 @@
 			</div>
 			<div id="mynavbar-right">
 				<ul>
-					{% if user.is_authenticated %}
-						<li id="highlight"><a href="{% url 'post-create' %}">New Recipe</a></li>
+					{% if request.user.is_authenticated %}
+						<li id="highlight"><a href="{% url 'recipe-create' %}">New Recipe</a></li>
 						<li id="highlight"><a href="{% url 'profile' %}">Profile</a></li>
 						<li id="highlight"><a href="{% url 'logout' %}">Logout</a></li>
 					{% else %}

@@ -7,26 +7,19 @@ from django.views.generic import (
 	UpdateView,
 	DeleteView
 )
-from .models import Post
-
-# This is our home function to handle home requests
-def home(request):
-	context = {
-		'posts': Post.objects.raw('SELECT * FROM food_recipe_post')
-	}
-	return render(request, 'food_recipe/index.html', context)
+from .models import Recipe
 
 class PostListView(ListView):
-	model = Post
+	model = Recipe
 	template_name = 'food_recipe/index.html'
-	context_object_name = 'posts'
+	context_object_name = 'recipes'
 	ordering = ['-date_posted']
 
 class PostDetailView(DetailView):
-	model = Post
+	model = Recipe
 
 class PostCreateView(LoginRequiredMixin, CreateView):
-	model = Post
+	model = Recipe
 	fields = ['recipe_name', 'recipe_content', 'recipe_image']
 
 	# set the current form instance equals to the 
@@ -43,7 +36,7 @@ class PostCreateView(LoginRequiredMixin, CreateView):
 		return context
 
 class PostUpdateView(LoginRequiredMixin, UserPassesTestMixin, UpdateView):
-	model = Post
+	model = Recipe
 	fields = ['recipe_name', 'recipe_content', 'recipe_image']
 
 	# set the current form instance equals to the 
@@ -53,19 +46,19 @@ class PostUpdateView(LoginRequiredMixin, UserPassesTestMixin, UpdateView):
 		return super().form_valid(form)
 
 	def test_func(self):
-		post = self.get_object()
-		if self.request.user == post.recipe_author:
+		recipe = self.get_object()
+		if self.request.user == recipe.recipe_author:
 			return True
 		else:
 			return False
 
 class PostDeleteView(LoginRequiredMixin, UserPassesTestMixin, DeleteView):
-	model = Post
+	model = Recipe
 	success_url = '/'
 
 	def test_func(self):
-		post = self.get_object()
-		if self.request.user == post.recipe_author:
+		recipe = self.get_object()
+		if self.request.user == recipe.recipe_author:
 			return True
 		else:
 			return False

@@ -5,7 +5,7 @@ from django.urls import reverse
 from PIL import Image
 
 # Our recipe database
-class Post(models.Model):
+class Recipe(models.Model):
 	recipe_image = models.ImageField(default='default.jpg', upload_to='recipe_pics')
 	recipe_name = models.CharField(max_length=100)
 	recipe_content = models.TextField()
@@ -28,4 +28,4 @@ class Post(models.Model):
 
 	# returns to the detail view of the recipe created
 	def get_absolute_url(self):
-		return reverse('post-detail', kwargs={'pk': self.pk})
+		return reverse('recipe-detail', kwargs={'pk': self.pk})

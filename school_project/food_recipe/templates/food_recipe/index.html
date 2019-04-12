@@ -13,15 +13,14 @@
 	<div class="mycontainer">
 		<section id="main">
 			<h1>List of Recipes</h1>
-			{% for post in posts %}
+			{% for recipe in recipes %}
 				<div id="card">
-					<a href="{% url 'post-detail' post.id %}"><img class="card-image" src="{{ post.recipe_image.url }}">
-						<h1>{{ post.recipe_name }}</h1>
+					<a href="{% url 'recipe-detail' recipe.id %}"><img class="card-image" src="{{ recipe.recipe_image.url }}"></a>
+						<h1>{{ recipe.recipe_name }}</h1>
 						<div id="card-footer">
-							<p>By {{ post.recipe_author }}</p>
-							<p>On {{ post.date_posted|date:"F d, Y" }}</p>
+							<a href="{% url 'profile-view' recipe.recipe_author.id %}">By {{ recipe.recipe_author }}</a>
+							<p>On {{ recipe.date_posted|date:"F d, Y" }}</p>
 						</div>
-					</a>
 				</div>
 			{% endfor %}
 		</section>

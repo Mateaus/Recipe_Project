@@ -19,6 +19,7 @@ from django.urls import path, include
 from django.conf import settings
 from django.conf.urls.static import static
 from users import views as user_views
+from users.views import ProfileDetailView
 
 #include('foods.urls') is looking at folder foods/urls.py
 urlpatterns = [
@@ -29,6 +30,7 @@ urlpatterns = [
     path('logout/', auth_views.LogoutView.as_view(template_name='users/logout.html'), name='logout'),
     path('register/', user_views.register, name='register'),
     path('profile/', user_views.profile, name='profile'),
+    path('profile/<int:pk>/', ProfileDetailView.as_view(), name='profile-view'),
 ]
 
 if settings.DEBUG:

@@ -14,10 +14,10 @@ from django.conf.urls.static import static
 urlpatterns = [
 	# views.(*) looks at views.py and extracts the specific func
     path('', PostListView.as_view(), name='food_recipe-home'),
-    path('post/<int:pk>/', PostDetailView.as_view(), name='post-detail'),
-    path('post/new/', PostCreateView.as_view(), name='post-create'),
-    path('post/<int:pk>/update/', PostUpdateView.as_view(), name='post-update'),
-    path('post/<int:pk>/delete/', PostDeleteView.as_view(), name='post-delete'),
+    path('recipe/<int:pk>/', PostDetailView.as_view(), name='recipe-detail'),
+    path('recipe/new/', PostCreateView.as_view(), name='recipe-create'),
+    path('recipe/<int:pk>/update/', PostUpdateView.as_view(), name='recipe-update'),
+    path('recipe/<int:pk>/delete/', PostDeleteView.as_view(), name='recipe-delete'),
 ]
 
 if settings.DEBUG:
