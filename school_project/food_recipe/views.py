@@ -15,6 +15,12 @@ class PostListView(ListView):
 	context_object_name = 'recipes'
 	ordering = ['-date_posted']
 
+	# send context title equals to "Create Recipe"
+	# into the template
+	def get_context_data(self, **kwargs):
+		context = super().get_context_data(**kwargs)
+		return context
+
 class PostDetailView(DetailView):
 	model = Recipe
 
@@ -22,7 +28,7 @@ class PostCreateView(LoginRequiredMixin, CreateView):
 	model = Recipe
 	fields = ['recipe_name', 'recipe_content', 'recipe_image']
 
-	# set the current form instance equals to the 
+	# set the current form instance equals to the
 	# current logged in user.
 	def form_valid(self, form):
 		form.instance.recipe_author = self.request.user
@@ -39,7 +45,7 @@ class PostUpdateView(LoginRequiredMixin, UserPassesTestMixin, UpdateView):
 	model = Recipe
 	fields = ['recipe_name', 'recipe_content', 'recipe_image']
 
-	# set the current form instance equals to the 
+	# set the current form instance equals to the
 	# current logged in user.
 	def form_valid(self, form):
 		form.instance.recipe_author = self.request.user

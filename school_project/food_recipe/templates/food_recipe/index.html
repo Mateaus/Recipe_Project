@@ -1,6 +1,6 @@
-{% extends "food_recipe/base.html" %}	
+{% extends "food_recipe/base.html" %}
 {% load static %}
-{% block css %} 
+{% block css %}
 	<link rel="stylesheet" type="text/css" href="{% static 'food_recipe/style.css' %}">
 {% endblock css %}
 {% block content %}
@@ -15,7 +15,11 @@
 			<h1>List of Recipes</h1>
 			{% for recipe in recipes %}
 				<div id="card">
-					<a href="{% url 'recipe-detail' recipe.id %}"><img class="card-image" src="{{ recipe.recipe_image.url }}"></a>
+					{% if recipe.recipe_image.url|slice:"7:12" == 'https' %}
+						<a href="{% url 'recipe-detail' recipe.id %}"><img class="card-image" src="{{ recipe.recipe_image }}"></a>
+					{% else %}
+						<a href="{% url 'recipe-detail' recipe.id %}"><img class="card-image" src="{{ recipe.recipe_image.url }}"></a>
+					{% endif %}
 						<h1>{{ recipe.recipe_name }}</h1>
 						<div id="card-footer">
 							<a href="{% url 'profile-view' recipe.recipe_author.id %}">By {{ recipe.recipe_author }}</a>
