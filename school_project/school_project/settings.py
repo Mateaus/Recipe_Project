@@ -80,8 +80,8 @@ DATABASES = {
     'default': {
         'ENGINE': 'django.db.backends.mysql',
         'NAME': 'recipe_data',
-        'USER': 'username',
-        'PASSWORD': 'password',
+        'USER': 'django',
+        'PASSWORD': 'utsa2019',
     }
 }
 

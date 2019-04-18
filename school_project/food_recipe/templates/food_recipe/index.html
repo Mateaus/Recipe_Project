@@ -11,20 +11,24 @@
 	</section>
 
 	<div class="mycontainer">
-		<section id="main">
+		<section id="main" class="mycontainer">
 			<h1>List of Recipes</h1>
 			{% for recipe in recipes %}
-				<div id="card">
-					{% if recipe.recipe_image.url|slice:"7:12" == 'https' %}
+				<div id="card" class="mycontainer">
+					<header>
+						{% if recipe.recipe_image.url|slice:"7:12" == 'https' %}
 						<a href="{% url 'recipe-detail' recipe.id %}"><img class="card-image" src="{{ recipe.recipe_image }}"></a>
-					{% else %}
+						{% else %}
 						<a href="{% url 'recipe-detail' recipe.id %}"><img class="card-image" src="{{ recipe.recipe_image.url }}"></a>
-					{% endif %}
+						{% endif %}
+					</header>
+					<div class="text">
 						<h1>{{ recipe.recipe_name }}</h1>
-						<div id="card-footer">
-							<a href="{% url 'profile-view' recipe.recipe_author.id %}">By {{ recipe.recipe_author }}</a>
-							<p>On {{ recipe.date_posted|date:"F d, Y" }}</p>
-						</div>
+					</div>
+					<footer id="card-footer">
+						<p>By <a href="{% url 'profile-view' recipe.recipe_author.id %}">{{ recipe.recipe_author }}</a></p>
+						<p>On {{ recipe.date_posted|date:"F d, Y" }}</p>
+					</footer>
 				</div>
 			{% endfor %}
 		</section>

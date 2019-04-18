@@ -65,8 +65,9 @@ p {
 }
 
 .mycontainer {
+	position: relative;
 	width: 80%;
-	margin:auto;
+	margin: auto;
 	overflow: hidden;
 }
 
@@ -143,12 +144,14 @@ p {
 #main {
 	width: 90%;
 	margin: auto;
+	padding-left: 10px;
 	box-sizing: border-box;
 }
 
 #card {
 	float: left;
-	width: auto;
+	width: 300px;
+	height: 400px;
 	margin-left: 10px;
 	margin-right: 10px;
 	margin-bottom: 30px;
@@ -161,7 +164,7 @@ p {
 
 .card-image {
 	height: 200px;
-	width: 200px;
+	width: 300px;
 }
 
 #card:hover {
@@ -175,7 +178,7 @@ p {
 }
 
 #card a {
-	color: #000;
+	color: #fff;
 	text-decoration: none;
 }
 
@@ -183,11 +186,15 @@ p {
 	background: #43a047;
 	padding-top: 5px;
 	padding-bottom: 5px;
+	position: absolute;
+	width: 100%;
+	bottom: 0px;
 }
 
 #card-footer p {
 	color: #fff;
 	margin: 0px;
+	bottom: 0px;
 }
 
 #main-footer {
@@ -221,6 +228,10 @@ p {
   border-radius: 4px;
 }
 
+.text {
+	width: auto;
+}
+
 .alert-success {
   color: #3c763d;
   background-color: #dff0d8;
@@ -241,8 +252,8 @@ p {
 @media(max-width:500px) {
 	#main {
 		width: 100%;
-		margin-left: 20%;
-		float: none;
+		padding-left: 0px;
+		float: left;
 	}
 
 	#mynavbar li {
