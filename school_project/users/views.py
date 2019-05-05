@@ -38,11 +38,11 @@ class ProfileDetailView(DetailView):
 		#cursor.close()
 		return context
 
-#def dictfetchall(cursor):  
-#    desc = cursor.description 
+#def dictfetchall(cursor):
+#    desc = cursor.description
 #    return [
- #           dict(zip([col[0] for col in desc], row)) 
- #           for row in cursor.fetchall() 
+ #           dict(zip([col[0] for col in desc], row))
+ #           for row in cursor.fetchall()
  #   ]
 
 @login_required
