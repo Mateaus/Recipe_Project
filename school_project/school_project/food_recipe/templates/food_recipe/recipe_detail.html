@@ -1,0 +1,41 @@
+{% extends "food_recipe/base.html" %}
+{% load static %}
+{% block css %}
+	 <!-- Required meta tags -->
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+
+    <!-- Bootstrap CSS -->
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
+
+    <link rel="stylesheet" type="text/css" href="{% static 'food_recipe/style.css' %}">
+{% endblock css %}
+{% block content %}
+
+	<div class="mycontainer">
+		<div class="content-section">
+			<h1>{{ object.recipe_name }}</h1>
+			<p>By {{ object.recipe_author }}</p>
+            {% if object.recipe_image.url|slice:"6:13" == '/recipe' %}
+                <img class="card-image" src="{{ object.recipe_image.url }}">
+            {% else %}
+                <img class="card-image" src="{{ object.recipe_image }}">
+            {% endif %}
+			<h2>Preparation: </h2>
+			<p>{{ object.recipe_content }}</p>
+			<p>On {{ object.date_posted|date:"F d, Y" }}</p>
+
+			{% if object.recipe_author == user %}
+				<a class="btn btn-secondary btn-sm mt-1 mb-1" href="{% url 'recipe-update' object.id %}">Update</a>
+				<a class="btn btn-danger btn-sm mt-1 mb-1" href="{% url 'recipe-delete' object.id %}">Delete</a>
+			{% endif %}
+		</div>
+	</div>
+{% endblock content %}
+{% block script %}
+    <!-- Optional JavaScript -->
+    <!-- jQuery first, then Popper.js, then Bootstrap JS -->
+    <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js" integrity="sha384-UO2eT0CpHqdSJQ6hJty5KVphtPhzWj9WO1clHTMGa3JDZwrnQq4sF86dIHNDz0W1" crossorigin="anonymous"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js" integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM" crossorigin="anonymous"></script>
+{% endblock script %}

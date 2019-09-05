@@ -1,0 +1,72 @@
+{% extends "food_recipe/base.html" %}
+{% load static %}
+{% block css %}
+<!-- Required meta tags -->
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+
+	<link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
+	<link rel="stylesheet" type="text/css" href="{% static 'food_recipe/style.css' %}">
+{% endblock css %}
+{% block content %}
+	<section id="showcase">
+		<div class="mycontainer">
+		</div>
+	</section>
+
+	<section id="searchbar">
+		<div class="mycontainer" style="text-align:center">
+			<form method="GET" action="{% url 'recipe-search' %}">
+				<input style="width:60%; font-size:14pt;" name="q" value="{{ request.GET.q }}" placeholder=" Search..">
+					<button class="btn btn-success" type="submit">
+						Search!
+					</button>
+			</form>
+		</div>
+	</section>
+
+	<div class="mycontainer">
+		<section id="main" class="mycontainer">
+			<h1>List of Recipes</h1>
+			{% for recipe in recipes %}
+				<div id="card" class="mycontainer">
+					<header>
+						{% if recipe.recipe_image.url|slice:"7:12" == 'https' %}
+						<a href="{% url 'recipe-detail' recipe.id %}"><img class="card-image" src="{{ recipe.recipe_image }}"></a>
+						{% else %}
+						<a href="{% url 'recipe-detail' recipe.id %}"><img class="card-image" src="{{ recipe.recipe_image.url }}"></a>
+						{% endif %}
+					</header>
+					<div class="text">
+						<h1>{{ recipe.recipe_name }}</h1>
+					</div>
+					<footer id="card-footer">
+						<p>By <a href="{% url 'profile-view' recipe.recipe_author.id %}">{{ recipe.recipe_author }}</a></p>
+						<p>On {{ recipe.date_posted|date:"F d, Y" }}</p>
+					</footer>
+				</div>
+			{% endfor %}
+		</section>
+		{% if is_paginated %}
+
+			{% if page_obj.has_previous %}
+				<a class='btn btn-outline-info mb-4' href="?page=1">First</a>
+				<a class='btn btn-outline-info mb-4' href="?page={{ page_obj.previous_page_number }}">Previous</a>
+			{% endif %}
+
+			{% for num in page_obj.paginator.page_range %}
+				{% if page_obj.number == num %}
+					<a class='btn btn-info mb-4' href="?page={{ num }}">{{ num }}</a>
+				{% elif num > page_obj.number|add:'-3' and num < page_obj.number|add:'3' %}
+					<a class='btn btn-outline-info mb-4' href="?page={{ num }}">{{ num }}</a>
+				{% endif %}
+			{% endfor %}
+
+			{% if page_obj.has_next %}
+				<a class='btn btn-outline-info mb-4' href="?page={{ page_obj.next_page_number }}">Next</a>
+				<a class='btn btn-outline-info mb-4' href="?page={{ page_obj.paginator.num_pages }}">Last</a>
+			{% endif %}
+
+		{% endif %}
+	</div>
+{% endblock content %}
